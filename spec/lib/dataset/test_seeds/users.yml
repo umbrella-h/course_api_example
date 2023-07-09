@@ -1,0 +1,13 @@
+users:
+  -
+    id: 123
+    name: Test User A
+    email: aa@t
+  -
+    id: 456
+    name: Test User A
+    email: ab@t
+  -
+    id: 789
+    name: Test User C
+    email: c@t

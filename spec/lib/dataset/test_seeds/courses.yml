@@ -1,0 +1,8 @@
+courses:
+  -
+    id: 123
+    name: Test Course A
+  -
+    id: 456
+    name: Test Course B
+  
