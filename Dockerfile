@@ -9,3 +9,4 @@ RUN gem install bundler -v '2.3.11'
 RUN bundle install
 RUN gem update --system
 CMD ["rails", "server", "-b", "0.0.0.0"]
+# `gem update --system` is for: Warning: the running version of Bundler is older than the version that created the lockfile

@@ -1,4 +1,4 @@
-require './domains/test/use_cases/plus'
+require 'test/use_cases/plus'
 
 RSpec.describe ::Test::UseCases::Plus do
   let(:x) { 10 }
