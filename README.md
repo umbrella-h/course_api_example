@@ -1,6 +1,8 @@
 # course_api_example
 
-## Basic Requirements
+## Request/Response Format Examples
+
+### Basic Requirements
 
 1. POST /api/v1/users
     ```zsh
@@ -78,16 +80,83 @@
     {"status":"failed","error":{"code":400,"message":"Bad Request: User not found"}}
     ```
 
-## Bonus Requirements
+### Bonus Requirements
 
 6. GET 	/api/v1/courses/:course_id/users
+    ```zsh
+    # create 2 users
+    # enroll the 2 users in a course
+    # then,
+
+    curl http://localhost:3000/api/v1/courses/2/users
+
+    {"status":"success","data":[{"id":1,"name":"Martin Fowler","email":"m@f"},{"id":2,"name":"Sandi Metz","email":"s@m"}]}
+    ```
+
+    ```zsh
+    curl http://localhost:3000/api/v1/courses/9999/users
+ 
+    {"status":"failed","error":{"code":400,"message":"Bad Request: Course not found"}}
+    ```
+
 6. POST  /api/v1/enrollments
+    ```zsh
+    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -d '{ "userId": 1, "courseId": 2, "role": "student"}'
+    
+    {"status":"success","data":{}}
+    ```
+    ```zsh
+    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -d '{ "userId": 9999, "courseId": 9998, "role": "auditor"}'
+    
+    {"status":"failed","error":{"code":400,"message":"Bad Request: userId User not found. courseId Course not found. role should be student or teacher"}}
+    ```
+    ```zsh
+    # enroll in again
+
+    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -d '{ "userId": 1, "courseId": 2, "role": "teacher"}'
+    
+    {"status":"failed","error":{"code":400,"message":"Bad Request: userId 1 has been enrolled in courseId 2"}}
+    ```
 6. DELETE  /api/v1/enrollments/:id
+    ```zsh
+    curl -X DELETE http://localhost:3000/api/v1/enrollments/1
+
+    {"status":"success","data":{}}
+    ```
 6. GET 	/api/v1/enrollments/:id
+    ```zsh
+    curl http://localhost:3000/api/v1/enrollments/1
+    
+    {"status":"success","data":{"id":1,"userId":12,"courseId":22,"role":"student"}}
+    ```
 6. GET 	/api/v1/courses/:course_id/enrollments
 6. GET 	/api/v1/users/:user_id/enrollments
 6. GET 	/api/v1/courses/:id
+    ```zsh
+    curl http://localhost:3000/api/v1/courses/1 
+      
+    {"status":"success","data":{"id":1,"name":"Software engineering 101"}}
+    ```
+    ```zsh
+    curl http://localhost:3000/api/v1/courses/9999
+
+    {"status":"failed","error":{"code":400,"message":"Bad Request: Course not found"}}
+    ```
 6. GET 	/api/v1/users/:user_id/courses
+    ```zsh
+    # create user
+    # enroll the user to 2 courses
+    # then,
+
+    curl http://localhost:3000/api/v1/users/1/courses
+    
+    {"status":"success","data":[{"id":2,"name":"成為 Cool 大師的路上"},{"id":1,"name":"Software engineering 101"}]}
+    ```
+    ```zsh
+    curl http://localhost:3000/api/v1/users/9999/courses
+    
+    {"status":"failed","error":{"code":400,"message":"Bad Request: User not found"}}
+    ```
 
 ## About RSpec
 
