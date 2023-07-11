@@ -29,10 +29,7 @@ module User
       end
 
       def find_record(validated_attributes:)
-        records = user_repo.where(
-          name: validated_attributes[:name],
-          email: validated_attributes[:email],
-        )
+        records = user_repo.where(validated_attributes)
         return Failure('User not found') if records.blank?
 
         Success(records.first)

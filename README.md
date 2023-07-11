@@ -107,7 +107,7 @@
     ```
     ```zsh
     curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -d '{ "userId": 9999, "courseId": 9998, "role": "auditor"}'
-    
+
     {"status":"failed","error":{"code":400,"message":"Bad Request: userId User not found. courseId Course not found. role should be student or teacher"}}
     ```
     ```zsh
@@ -126,11 +126,35 @@
 6. GET 	/api/v1/enrollments/:id
     ```zsh
     curl http://localhost:3000/api/v1/enrollments/1
-    
+
     {"status":"success","data":{"id":1,"userId":12,"courseId":22,"role":"student"}}
     ```
 6. GET 	/api/v1/courses/:course_id/enrollments
 6. GET 	/api/v1/users/:user_id/enrollments
+    ```zsh
+    # create user
+    # enroll the user in 3 courses as different roles
+    # then,
+
+    curl "http://localhost:3000/api/v1/users/1/enrollments?role=teacher"
+
+    {"status":"success","data":[{"id":1,"userId":1,"courseId":1,"role":"teacher"},{"id":2,"userId":1,"courseId":2,"role":"teacher"}]}
+    ```
+    ```zsh
+    curl "http://localhost:3000/api/v1/users/1/enrollments?role=teacher&courseId=1"
+
+    {"status":"success","data":[{"id":3,"userId":1,"courseId":1,"role":"teacher"}]}
+    ```
+    ```zsh
+    curl http://localhost:3000/api/v1/users/1/enrollments
+    
+    {"status":"failed","error":{"code":400,"message":"Bad Request: Please query by role or courseId"}}
+    ```
+    ```zsh
+    curl "http://localhost:3000/api/v1/users/9999/enrollments?role=teacher"
+
+    {"status":"failed","error":{"code":400,"message":"Bad Request: userId user not found"}}
+    ```
 6. GET 	/api/v1/courses/:id
     ```zsh
     curl http://localhost:3000/api/v1/courses/1 
