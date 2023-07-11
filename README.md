@@ -78,7 +78,19 @@
     {"status":"failed","error":{"code":400,"message":"Bad Request: User not found"}}
     ```
 
+## Bonus Requirements
+
+6. GET 	/api/v1/courses/:course_id/users
+6. POST  /api/v1/enrollments
+6. DELETE  /api/v1/enrollments/:id
+6. GET 	/api/v1/enrollments/:id
+6. GET 	/api/v1/courses/:course_id/enrollments
+6. GET 	/api/v1/users/:user_id/enrollments
+6. GET 	/api/v1/courses/:id
+6. GET 	/api/v1/users/:user_id/courses
+
 ## About RSpec
+
 - 有挑選幾個相較複雜的商務邏輯，[撰寫測試](spec)，提供給團隊了解我寫測試的風格。
 
 ## About In-Memory Data Manipulation
