@@ -53,16 +53,4 @@ RSpec.describe User::UseCases::CreateUser do
       expect(result.failure).to eq("email format should match /^\S@\S$/")
     end
   end
-
-  private
-
-  def expected_users
-    {
-      users: [
-        { id: 1, name: 'Martin Fowler', email: 'm@f' },
-        { id: 2, name: 'Sandi Metz', email: 's@m' },
-        { id: 3, name: 'Yukihiro Matsumoto', email: 'y@m' },
-      ],
-    }
-  end
 end
