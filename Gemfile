@@ -28,6 +28,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'dry-initializer', '~> 3.0'
+gem 'dry-monads', '~> 1.3'
+gem 'dry-struct', '~> 1.3'
+gem 'dry-validation', '~> 1.5'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -51,7 +56,7 @@ group :test do
 
   ### Testing ###
   gem 'rspec', '~> 3.10'
-  # gem 'rspec-rails', require: false
+  gem 'rspec-rails', require: false
 
   # TODO: set up GitHub Actions
   # gem 'rspec-github', require: false
