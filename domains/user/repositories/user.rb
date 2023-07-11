@@ -6,13 +6,6 @@ module User
       option :source, default: -> { Dataset::Base.instance }
       option :factory, default: -> { Factory::User.new }
 
-      def find(id:)
-        record = source.find(table_name: table_name, primary_hash: { id: id })
-        return nil if record.nil?
-
-        factory.build(record)
-      end
-
       def where(name: nil, email: nil)
         query_hash = { name: name, email: email }.compact
         records = source.where(table_name: table_name, query_hash: query_hash)
