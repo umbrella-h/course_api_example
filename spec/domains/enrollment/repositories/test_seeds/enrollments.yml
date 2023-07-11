@@ -1,0 +1,16 @@
+enrollments:
+  -
+    id: 11
+    userId: 12
+    courseId: 13
+    role: student
+  -
+    id: 21
+    userId: 22
+    courseId: 23
+    role: student
+  -
+    id: 31
+    userId: 32
+    courseId: 33
+    role: teacher

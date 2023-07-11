@@ -4,8 +4,8 @@ module User
       option :validator, default: -> { User::UseCases::CreateUser::Validator.new }
       option :user_repo, default: -> { ::User::Repositories::User.new }
 
-      def steps(attributes:)
-        validated_attributes = yield validate(attributes: attributes)
+      def steps(name:, email:)
+        validated_attributes = yield validate(attributes: { name: name, email: email })
         create_record(validated_attributes: validated_attributes)
 
         Success()

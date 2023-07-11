@@ -1,0 +1,31 @@
+enrollments: []
+users:
+  -
+    id: 12
+    name: Test User A
+    email: a@t
+  -
+    id: 22
+    name: Test User B
+    email: b@t
+  -
+    id: 32
+    name: Test User C
+    email: c@t
+  -
+    id: 42
+    name: Test User D
+    email: d@t
+courses:
+  -
+    id: 13
+    name: Test Course A
+  -
+    id: 23
+    name: Test Course B
+  -
+    id: 33
+    name: Test Course C
+  -
+    id: 43
+    name: Test Course D
