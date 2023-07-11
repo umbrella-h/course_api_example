@@ -1,5 +1,7 @@
 module Api::V1
   class UsersController < BaseController
+    before_action :authenticate, only: %i[create update destroy]
+
     def index
       result = User::UseCases::QueryUser.new.call(name: params[:name], email: params[:email])
       return bad_request(failure_message: result.failure) unless result.success?

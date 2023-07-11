@@ -1,5 +1,7 @@
 module Api::V1
   class EnrollmentsController < BaseController
+    before_action :authenticate, only: %i[create destroy]
+
     def show
       result = Enrollment::UseCases::FindEnrollmentById.new.call(id: params[:id])
       return bad_request(failure_message: result.failure) unless result.success?
