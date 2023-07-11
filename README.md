@@ -45,18 +45,18 @@
 
 1. POST /api/v1/users
     ```zsh
-    curl -X POST http://localhost:3000/api/v1/users -H "Content-Type: application/json" -d '{ "name": "Martin Fowler", "email": "m@f"}'
+    curl -X POST http://localhost:3000/api/v1/users -H "Content-Type: application/json" -H "Authorization: Bearer ****" -d '{ "name": "Martin Fowler", "email": "m@f"}'
 
     {"status":"success","data":{}}
     ```
     ```zsh
-    curl -X POST http://localhost:3000/api/v1/users -H "Content-Type: application/json" -d '{ "name": "Martin Fowler", "email": "m@f"}'
+    curl -X POST http://localhost:3000/api/v1/users -H "Content-Type: application/json" -H "Authorization: Bearer ****" -d '{ "name": "Martin Fowler", "email": "m@f"}'
 
     {"status":"failed","error":{"code":400,"message":"Bad Request: name 'Martin Fowler' is used. email 'm@f' is used"}}
     ```
 
     ```zsh
-    curl -X POST http://localhost:3000/api/v1/users -H "Content-Type: application/json" -d '{ "name": "Sandi Metz", "email": "sd@mt"}'
+    curl -X POST http://localhost:3000/api/v1/users -H "Content-Type: application/json" -H "Authorization: Bearer ****" -d '{ "name": "Sandi Metz", "email": "sd@mt"}'
 
     {"status":"failed","error":{"code":400,"message":"Bad Request: email format should match /^S@S$/"}}
     ```
@@ -90,7 +90,7 @@
     ```
 1. PUT 	/api/v1/users/:id
     ```zsh
-    curl -X PUT http://localhost:3000/api/v1/users/1 -H "Content-Type: application/json" -d '{"name": "M Fowler"}'
+    curl -X PUT http://localhost:3000/api/v1/users/1 -H "Content-Type: application/json" -H "Authorization: Bearer ****"  -d '{"name": "M Fowler"}'
 
     {"status":"success","data":{}}
 
@@ -99,13 +99,13 @@
     {"status":"success","data":{"id":1,"name":"M Fowler","email":"m@f"}}
     ```
     ```zsh
-    curl -X PUT http://localhost:3000/api/v1/users/9999 -H "Content-Type: application/json" -d '{"name": "M Fowler", "email": "m@fl"}'
+    curl -X PUT http://localhost:3000/api/v1/users/9999 -H "Content-Type: application/json"-H "Authorization: Bearer ****" -d '{"name": "M Fowler", "email": "m@fl"}'
 
     {"status":"failed","error":{"code":400,"message":"Bad Request: id user not found. name 'M Fowler' is used. email format should match /^S@S$/"}}
     ```
 1. DELETE /api/v1/users/:id
     ```zsh
-    curl -X DELETE http://localhost:3000/api/v1/users/1
+    curl -X DELETE -H "Authorization: Bearer ****" http://localhost:3000/api/v1/users/1
 
     {"status":"success","data":{}}
 
@@ -114,7 +114,7 @@
     {"status":"failed","error":{"code":400,"message":"Bad Request: User not found"}}
     ```
     ```zsh
-    curl -X DELETE http://localhost:3000/api/v1/users/9999
+    curl -X DELETE -H "Authorization: Bearer ****" http://localhost:3000/api/v1/users/9999
 
     {"status":"failed","error":{"code":400,"message":"Bad Request: User not found"}}
     ```
@@ -140,25 +140,25 @@
 
 6. POST  /api/v1/enrollments
     ```zsh
-    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -d '{ "userId": 1, "courseId": 2, "role": "student"}'
+    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -H "Authorization: Bearer ****" -d '{ "userId": 1, "courseId": 2, "role": "student"}'
     
     {"status":"success","data":{}}
     ```
     ```zsh
-    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -d '{ "userId": 9999, "courseId": 9998, "role": "auditor"}'
+    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -H "Authorization: Bearer ****" -d '{ "userId": 9999, "courseId": 9998, "role": "auditor"}'
 
     {"status":"failed","error":{"code":400,"message":"Bad Request: userId User not found. courseId Course not found. role should be student or teacher"}}
     ```
     ```zsh
     # enroll in again
 
-    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -d '{ "userId": 1, "courseId": 2, "role": "teacher"}'
+    curl -X POST http://localhost:3000/api/v1/enrollments -H "Content-Type: application/json" -H "Authorization: Bearer ****" -d '{ "userId": 1, "courseId": 2, "role": "teacher"}'
     
     {"status":"failed","error":{"code":400,"message":"Bad Request: userId 1 has been enrolled in courseId 2"}}
     ```
 6. DELETE  /api/v1/enrollments/:id
     ```zsh
-    curl -X DELETE http://localhost:3000/api/v1/enrollments/1
+    curl -X DELETE -H "Authorization: Bearer ****" http://localhost:3000/api/v1/enrollments/1
 
     {"status":"success","data":{}}
     ```

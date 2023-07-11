@@ -21,6 +21,13 @@
 /storage/*
 !/storage/.keep
 
+
+# Ignore any version of .env files. (expect the example)
+/.env
+/.env.*
+!/.env.template
+!/.env.example
+
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
