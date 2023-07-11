@@ -1,0 +1,9 @@
+users:
+  -
+    id: 2
+    name: Sandi Metz
+    email: s@m
+  -
+    id: 3
+    name: Yukihiro Matsumoto
+    email: y@m
