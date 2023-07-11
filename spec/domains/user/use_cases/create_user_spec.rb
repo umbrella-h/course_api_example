@@ -19,9 +19,9 @@ RSpec.describe User::UseCases::CreateUser do
         validator: User::UseCases::CreateUser::Validator.new(user_repo: fake_user_repo),
       )
 
-      use_case.call(attributes: { name: 'Martin Fowler', email: 'm@f' })
-      use_case.call(attributes: { name: 'Sandi Metz', email: 's@m' })
-      use_case.call(attributes: { name: 'Yukihiro Matsumoto', email: 'y@m' })
+      use_case.call(name: 'Martin Fowler', email: 'm@f')
+      use_case.call(name: 'Sandi Metz', email: 's@m')
+      use_case.call(name: 'Yukihiro Matsumoto', email: 'y@m')
 
       expect(fake_user_repo).to have_received(:create).with(attributes: { name: 'Martin Fowler', email: 'm@f' }).once
       expect(fake_user_repo).to have_received(:create).with(attributes: { name: 'Sandi Metz', email: 's@m' }).once
@@ -32,23 +32,23 @@ RSpec.describe User::UseCases::CreateUser do
   context 'unhappy path' do
     it 'name is used' do
       use_case = described_class.new
-      use_case.call(attributes: { name: 'Martin Fowler', email: 'm@f' })
-      result = use_case.call(attributes: { name: 'Martin Fowler', email: 'n@f' })
+      use_case.call(name: 'Martin Fowler', email: 'm@f')
+      result = use_case.call(name: 'Martin Fowler', email: 'n@f')
 
       expect(result.failure).to eq("name 'Martin Fowler' is used")
     end
 
     it 'email is used' do
       use_case = described_class.new
-      use_case.call(attributes: { name: 'Martin Fowler', email: 'm@f' })
-      result = use_case.call(attributes: { name: 'M Fowler', email: 'm@f' })
+      use_case.call(name: 'Martin Fowler', email: 'm@f')
+      result = use_case.call(name: 'M Fowler', email: 'm@f')
 
       expect(result.failure).to eq("email 'm@f' is used")
     end
 
     it 'email format should match /^\S@\S$/' do
       use_case = described_class.new
-      result = use_case.call(attributes: { name: 'Martin Fowler', email: 'mt@f' })
+      result = use_case.call(name: 'Martin Fowler', email: 'mt@f')
 
       expect(result.failure).to eq("email format should match /^\S@\S$/")
     end

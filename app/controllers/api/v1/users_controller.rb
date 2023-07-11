@@ -15,7 +15,7 @@ module Api::V1
     end
 
     def create
-      result = User::UseCases::CreateUser.new.call(attributes: { name: params[:name], email: params[:email] })
+      result = User::UseCases::CreateUser.new.call(name: params[:name], email: params[:email])
       return bad_request(failure_message: result.failure) unless result.success?
 
       render json: success_json(data: result.value!)
