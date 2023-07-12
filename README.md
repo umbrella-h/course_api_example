@@ -1,5 +1,13 @@
 # course_api_example
 
+## Ruby Version
+```
+ruby 2.7.0
+```
+```
+rails 5.2.6
+```
+
 ## API Routes
 
 ### Basic Requirements
@@ -21,14 +29,19 @@
 6. GET 	/api/v1/courses/:id
 6. GET 	/api/v1/users/:user_id/courses
 
+### Advanced Requirements
+
+已實作於指定 API routes。
+
 ## About RSpec
 
-- 有挑選幾個相較複雜的商務邏輯，[撰寫測試](spec)，提供給團隊了解我寫測試的風格。
+- 有挑選幾個相較複雜的商務邏輯、[撰寫測試](spec)，提供給團隊了解我寫測試的風格。
+- GitHub Actions 會在推 PR 時執行。
 
 ## About In-Memory Data Manipulation
 
 - 由於這是一個簡單的小範例，僅用[一個 singleton pattern 的 class](lib/dataset/base.rb) 代表底層資料庫操作。
-- 實做是完全 in-memory 的，在 development 環境中 rails s 啟動時會建立 default seeds，server 中止後不會留存任何資料。
+- 實做是 in-memory 的，在 development 環境中 rails s 啟動時會建立 [default seeds](lib/dataset/default_seeds)，server 中止後不會留存任何資料。
 - 在開發環境中修改程式碼後不會留存資料、也不會重新建立 default seeds；有先做一個提示訊息。如果還有時間，可以考慮設計更優雅的做法。
 
     ```zsh
@@ -36,7 +49,7 @@
 
     {"status":"failed","error":{"code":400,"message":"Bad Request: Dataset is not set up. Please restart Rails app."}}
     ```
-- 就算有做任何形式的 snapshot，或容許僅用於暫存資料，實務上，我個人還是非常不建議這種作法，如有興趣可再討論。
+- 若在實務上，就算有做任何形式的 snapshot、或僅用於暫存資料，我個人還是不建議貿然應用這種作法。
 
 
 ## Request/Response Format Examples
