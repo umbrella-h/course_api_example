@@ -26,6 +26,14 @@ RSpec.describe User::Repositories::User do
     end
   end
 
+  context 'filter by ids' do
+    it 'happy path: filter by name' do
+      entities = user_repo.where_by_ids(ids: [123, 456])
+
+      expect(entities.map(&:to_h)).to match_array([{ id: 123, name: 'Test User A', email: 'a@t' }, { id: 456, name: 'Test User A', email: 'b@t' }])
+    end
+  end
+
   context 'find by primary key' do
     it 'find by id' do
       entity = user_repo.find(id: 456 )

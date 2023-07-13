@@ -29,9 +29,8 @@ module Enrollment
       end
 
       def retrieve_courses(enrollments:)
-        enrollments.map do |enrollment|
-          course_client.find_course_by_id(id: enrollment.courseId)
-        end
+        courseIds = enrollments.map(&:courseId)
+        course_client.find_courses_by_ids(ids: courseIds)
       end
     end
   end
