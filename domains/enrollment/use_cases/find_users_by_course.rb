@@ -29,9 +29,8 @@ module Enrollment
       end
 
       def retrieve_users(enrollments:)
-        enrollments.map do |enrollment|
-          user_client.find_user_by_id(id: enrollment.userId)
-        end
+        userIds = enrollments.map(&:userId)
+        user_client.find_users_by_ids(ids: userIds)
       end
     end
   end

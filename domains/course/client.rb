@@ -6,5 +6,9 @@ module Course
 
       result.value!
     end
+
+    def find_courses_by_ids(ids:)
+      Course::Repositories::Course.new.where_by_ids(ids: ids)
+    end
   end
 end

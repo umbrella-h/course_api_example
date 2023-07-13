@@ -15,6 +15,13 @@ module User
         end
       end
 
+      def where_by_ids(ids:)
+        records = source.where(table_name: table_name, query_hash: { id: ids })
+        records.map do |record|
+          factory.build(record)
+        end
+      end
+
       def create(attributes:)
         id = (last_record_id || 0) + 1
         source.create(table_name: table_name, primary_hash: { id: id }, attributes: attributes)

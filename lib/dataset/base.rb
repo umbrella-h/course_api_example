@@ -47,7 +47,11 @@ module Dataset
         judgements = query_hash.map do |k, v|
           next false if record[k].nil?
 
-          record[k] == v
+          if v.kind_of?(Array)
+            v.include?(record[k])
+          else
+            record[k] == v
+          end
         end.uniq
         records_with_index.push({ index: index, record: record }) if judgements == [true]
       end

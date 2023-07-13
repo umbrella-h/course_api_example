@@ -6,5 +6,9 @@ module User
 
       result.value!
     end
+
+    def find_users_by_ids(ids:)
+      User::Repositories::User.new.where_by_ids(ids: ids)
+    end
   end
 end
