@@ -21,10 +21,18 @@ RSpec.describe Dataset::Base do
   end
 
   context 'where' do
-    it 'happy path' do
-      data = described_class.instance.where(table_name: 'users', query_hash: { name: 'Test User A' })
+    context 'happy path' do
+      it 'no array in query values' do
+        data = described_class.instance.where(table_name: 'users', query_hash: { name: 'Test User A' })
 
-      expect(data).to match_array([{ id: 123, name: 'Test User A', email: 'aa@t' }, { id: 456, name: 'Test User A', email: 'ab@t' }])
+        expect(data).to match_array([{ id: 123, name: 'Test User A', email: 'a@t' }, { id: 456, name: 'Test User A', email: 'b@t' }])
+      end
+
+      it 'array in query values' do
+        data = described_class.instance.where(table_name: 'users', query_hash: { email: ['b@t', 'c@t'] })
+
+        expect(data).to match_array([{ id: 789, name: 'Test User C', email: 'c@t' }, { id: 456, name: 'Test User A', email: 'b@t' }])
+      end
     end
   end
 
@@ -32,7 +40,7 @@ RSpec.describe Dataset::Base do
     it 'happy path' do
       data = described_class.instance.find(table_name: 'users', primary_hash: { id: 456 })
 
-      expect(data).to eq({ id: 456, name: 'Test User A', email: 'ab@t' })
+      expect(data).to eq({ id: 456, name: 'Test User A', email: 'b@t' })
     end
   end
 
@@ -56,7 +64,7 @@ RSpec.describe Dataset::Base do
     it 'happy path' do
       described_class.instance.delete(table_name: 'users', primary_hash: { id: 123 })
 
-      expect(described_class.instance.tables[:users]).to match_array([{ id: 789, name: 'Test User C', email: 'c@t' }, { id: 456, name: 'Test User A', email: 'ab@t' }])
+      expect(described_class.instance.tables[:users]).to match_array([{ id: 789, name: 'Test User C', email: 'c@t' }, { id: 456, name: 'Test User A', email: 'b@t' }])
     end
   end
 
@@ -69,8 +77,8 @@ RSpec.describe Dataset::Base do
         { id: 456, name: 'Test Course B' },
       ],
       users: [
-        { id: 123, name: 'Test User A', email: 'aa@t' },
-        { id: 456, name: 'Test User A', email: 'ab@t' },
+        { id: 123, name: 'Test User A', email: 'a@t' },
+        { id: 456, name: 'Test User A', email: 'b@t' },
         { id: 789, name: 'Test User C', email: 'c@t' },
       ],
     }
