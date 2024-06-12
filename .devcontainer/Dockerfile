@@ -6,7 +6,8 @@ ARG TimeZone=Asia/Taipei
 RUN ln -snf /usr/share/zoneinfo/${TimeZone} /etc/localtime
 RUN echo ${TimeZone} > /etc/timezone
 
-RUN apt-get update && apt-get install -y build-essential git vim
+RUN apt-get update && apt-get install -y gcc make git vim
+# build-essential could provide better experience, while the installation is slow
 COPY ruby-extensions/Gemfile /usr/workspace/.devcontainer/ruby-extensions/Gemfile
 COPY ruby-extensions/Gemfile.lock /usr/workspace/.devcontainer/ruby-extensions/Gemfile.lock
 
